@@ -1,0 +1,36 @@
+dataset_path: HuggingFaceM4/ChartQA
+dataset_kwargs:
+  token: True
+task: "chartqaglob"
+test_split: test
+fewshot_split: train
+output_type: generate_until
+doc_to_visual: !function utils.chartqa_doc_to_visual
+doc_to_text: !function utils.chartqa_doc_to_text
+doc_to_target: "label"
+process_results: !function utils.chartqa_process_results
+metric_list:
+  - metric: relaxed_overall
+    aggregation: mean
+    higher_is_better: true
+  - metric: relaxed_human_split
+    aggregation: mean
+    higher_is_better: true
+  - metric: relaxed_augmented_split
+    aggregation: mean
+    higher_is_better: true
+  - metric: lave
+    aggregation: lave
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
+metadata:
+  - version: 0.0
+model_specific_prompt_kwargs:
+  default:
+    pre_prompt: ""
+    post_prompt: ""
+  qwen_vl:
+    pre_prompt: ""
+    post_prompt: ""
+include: /vqaglob/lmms-eval/lmms_eval/tasks/glob/_default_template_0_yaml

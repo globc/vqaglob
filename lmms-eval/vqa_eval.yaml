@@ -1,0 +1,64 @@
+# - model: llava
+#   model_args: pretrained=liuhaotian/llava-v1.6-vicuna-7b,conv_template=plain,use_flash_attention_2=False,device_map=cuda:0
+#   tasks: vqav2_valglob,textvqa_valglob,docvqa_valglob,ok_vqa_val2014glob,aok_vqaglob
+#   batch_size: 1
+#   output_path: "./logs/"
+#   limit: 100
+#   num_fewshot: 4
+
+# - model: llava
+#   model_args: pretrained=liuhaotian/llava-v1.6-vicuna-7b,use_flash_attention_2=False,device_map=cuda:0,fewshot_images=False
+#   tasks: vqav2_valglob,textvqa_valglob,docvqa_valglob,ok_vqa_val2014glob,aok_vqaglob,ai2dglob,vizwiz_vqa_valglob,gqa,chartqaglob,infovqa_valglob,contextual_val
+#   batch_size: 1
+#   output_path: "./logs/"
+#   limit: 10
+#   num_fewshot: 2
+
+# - model: llava
+#   model_args: pretrained=liuhaotian/llava-v1.6-vicuna-7b,use_flash_attention_2=False,device_map=cuda:0,fewshot_images=False,setup=COT_CHAT_BASIC #CHAT_CUSTOM
+#   tasks: glob
+#   batch_size: 1
+#   output_path: "./logs/"
+#   limit: 1000
+#   num_fewshot: 4
+
+# - model: multimodal_cot
+#   model_args: answer_model=idefics
+#   tasks: glob
+#   batch_size: 1
+#   output_path: "./logs/"
+#   limit: 1000
+#   #num_fewshot: 4
+
+- model: instructblip
+  model_args: setup=CHAT_NULL
+  tasks: vqav2_valglob,textvqa_valglob,docvqa_valglob,ok_vqa_val2014glob,aok_vqaglob,ai2dglob,vizwiz_vqa_valglob,gqa,chartqaglob,infovqa_valglob,contextual_val
+  batch_size: 1
+  output_path: "./logs/"
+  limit: 1000
+  num_fewshot: 4
+
+# - model: idefics
+#   model_args: fewshot_images=True,setup=COT_CHAT_BASIC
+#   tasks: glob
+#   batch_size: 1
+#   output_path: "./logs/"
+#   limit: 1000
+#   num_fewshot: 4
+
+# - model: instructblip
+#   model_args: setup=CHAT_CUSTOM
+#   tasks: glob
+#   batch_size: 1
+#   output_path: "./logs/"
+#   limit: 3
+#   num_fewshot: 2
+
+# - model: llava
+#   model_args: pretrained="liuhaotian/llava-v1.6-mistral-7b,conv_template=mistral_instruct,use_flash_attention_2=False,device_map=cuda:0"
+#   tasks: ok_vqa_val2014
+#   batch_size: 1
+#   log_samples: true
+#   log_samples_suffix: debug
+#   output_path: "./logs/"
+#   limit: 10
